@@ -39,12 +39,29 @@ function renderCurrent (weather) {
     `;
 }
 
+function renderForecast(weather) {
+    const daily = weather.daily
+    const times = daily.time
+    let output = `<h2>Прогноз</h2>`;
+
+    for (let i=0; i<times.length; i++) {
+        time = times[i]
+        t_max = daily.temperature_2m_max[i]
+        t_min = daily.temperature_2m_min[i]
+
+        output += `<div>⌚ ${time} 🌡 max: ${t_max} / min: ${t_min} </div>`
+    }
+
+    document.querySelector('#forecast').innerHTML = output;
+}
+
 async function main(city) {
     try {
         let place = await getCoordinates(city)
         let weather = await getWeather(place.latitude, place.longitude)
         console.log(weather)
         renderCurrent(weather) 
+        renderForecast(weather)
     }
     catch(e) {
         console.log(e)
