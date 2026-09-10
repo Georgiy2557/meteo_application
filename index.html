@@ -9,6 +9,13 @@
   background: linear-gradient(cyan, white);
   min-height: 750px;
   margin: 0;
+
+  .block {
+    margin: 5px;
+    padding: 5px;
+    border: 1px solid black;
+    border-radius: 10px;
+  }
 }
  
 </style>
@@ -16,8 +23,9 @@
 <body>
     <input id="cityInput" placeholder="Місто">
     <button id="searchBtn">Пошук</button>
-    <div id="currentWeather"></div>
-    <div id="forecast"></div>
+    <div id="history" class="block"></div>
+    <div id="currentWeather" class="block"></div>
+    <div id="forecast" class="block"></div>
     <script src = "app.js"></script>
 </body>
 </html>

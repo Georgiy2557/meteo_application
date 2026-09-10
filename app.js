@@ -69,13 +69,53 @@ function renderForecast(weather) {
         }else if (code >= 95 && code <= 99){
              weatherImage = "⚡"
         }
-        
+
         output += `<div>⌚ ${time} ${weatherImage} ${t_max} / ${t_min} </div>`
     }
 
     document.querySelector('#forecast').innerHTML = output;
-    }
+}
 
+function getHistory() {
+    return JSON.parse(localStorage.getItem("history")) || [];
+}
+
+function addToHistory(city) {
+    let history = getHistory();
+
+    history = history.filter(item => item !== city);
+
+    history.unshift(city);
+
+    history = history.slice(0, 5);
+
+    localStorage.setItem("history", JSON.stringify(history));
+
+    renderHistory();
+
+}
+
+function renderHistory() {
+    const history = getHistory();
+
+    document.querySelector("#history").innerHTML = `
+        <h2>Історія пошуку</h2>
+
+        ${history.map(city => `
+            <button class="history-city">${city}</button>
+        `).join("")}
+    `;
+
+    document.querySelectorAll(".history-city").forEach(button => {
+        button.addEventListener("click", () => {
+            const city = button.textContent;
+
+            document.querySelector("#cityInput").value = city;
+
+            main(city);
+        });
+    });
+}
 
 async function main(city) {
     try {
@@ -84,6 +124,7 @@ async function main(city) {
         console.log(weather)
         renderCurrent(weather) 
         renderForecast(weather)
+        addToHistory(city)
     }
     catch(e) {
         console.log(e)
@@ -101,3 +142,5 @@ document.getElementById("cityInput").addEventListener("keydown", (e) => {
         main(city); 
     }
 })
+
+renderHistory();
