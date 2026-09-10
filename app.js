@@ -124,6 +124,8 @@ async function main(city) {
         console.log(weather)
         renderCurrent(weather) 
         renderForecast(weather)
+        document.getElementById("currentWeather").classList.remove("invisible")
+        document.getElementById("forecast").classList.remove("invisible")
         addToHistory(city)
     }
     catch(e) {

@@ -5,27 +5,32 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 <style>
-  body {
-  background: linear-gradient(cyan, white);
-  min-height: 750px;
-  margin: 0;
+      body {
+          background: linear-gradient(cyan, white);
+          min-height: 750px;
+          margin: 0;
+      }
 
-  .block {
-    margin: 5px;
-    padding: 5px;
-    border: 1px solid black;
-    border-radius: 10px;
-  }
-}
- 
+      .block {
+        margin: 5px;
+        padding: 5px;
+        border: 1px solid black;
+        border-radius: 5px;
+      }
+
+      .invisible {
+          display: none;
+      }
 </style>
 </head>
 <body>
-    <input id="cityInput" placeholder="Місто">
-    <button id="searchBtn">Пошук</button>
+    <div class="searchString block">
+        <input id="cityInput" placeholder="Місто">
+        <button id="searchBtn">Пошук</button>
+    </div>
     <div id="history" class="block"></div>
-    <div id="currentWeather" class="block"></div>
-    <div id="forecast" class="block"></div>
+    <div id="currentWeather" class="block invisible"></div>
+    <div id="forecast" class="block invisible"></div>
     <script src = "app.js"></script>
 </body>
 </html>
